@@ -1,8 +1,8 @@
 # E-Commerce Recruitment Task
 
-This repository contains a simple e-commerce application built with Next.js, TypeScript, and Tailwind CSS. The application allows users to browse products, add them to a cart, and view the cart contents.
+( ! Work in Progress ! )
 
-(Work in Progress)
+This repository contains a simple e-commerce application built with Next.js, TypeScript, and Tailwind CSS. The application allows users to browse products, add them to a cart, and view the cart contents.
 
 ## Requirements
 
