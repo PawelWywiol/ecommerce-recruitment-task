@@ -6,12 +6,12 @@ import { HeroSection } from '@/components/hero-section';
 import { Newsletter } from '@/components/newsletter';
 
 export default async function Page() {
-  const fetchedProducts = await getProducts({ offset: 0, limit: 4 });
+  const products = await getProducts({ offset: 0, limit: 4 });
 
   return (
     <>
       <HeroSection />
-      <FeaturedProducts products={fetchedProducts} />
+      <FeaturedProducts products={products} />
       <Features />
       <Newsletter />
     </>

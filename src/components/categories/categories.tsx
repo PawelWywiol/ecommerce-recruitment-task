@@ -19,7 +19,7 @@ export const Categories = ({ categories }: { categories: Category[] }) => {
     .slice(0, MAX_CATEGORIES_TO_SHOW);
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="space-y-6 mb-12">
         <div className="text-center space-y-4">
@@ -106,6 +106,6 @@ export const Categories = ({ categories }: { categories: Category[] }) => {
           Contact Personal Stylist
         </Button>
       </div>
-    </div>
+    </section>
   );
 };

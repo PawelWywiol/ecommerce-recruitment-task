@@ -1,16 +1,10 @@
-import { ArrowRightIcon, StarIcon } from 'lucide-react';
+import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import type { Product } from '@/services/products/products.type';
 
-import { Badge } from './ui/badge';
+import { ProductItem } from './products/product-item';
 import { Button } from './ui/button';
-import { Card, CardContent } from './ui/card';
-
-const MIN_RATING = 4;
-const MIN_REVIEWS = 46;
-const PROMO_PERCENTAGE = 1.25;
-const MIN_PROMO_PRICE = 50;
 
 export const FeaturedProducts = ({ products }: { products: Product[] }) => (
   <section className="py-16 lg:py-24">
@@ -24,65 +18,8 @@ export const FeaturedProducts = ({ products }: { products: Product[] }) => (
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {products.map((product, index) => (
-          <Card
-            key={product.id}
-            className="group cursor-pointer border-border/40 hover:border-luxury-gold/40 transition-all duration-300 hover:shadow-lg"
-          >
-            <CardContent className="p-0">
-              <div className="relative aspect-square overflow-hidden rounded-t-lg">
-                <picture>
-                  <img
-                    src={product.images[0]}
-                    alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </picture>
-                <Badge
-                  className={`absolute top-3 left-3 ${
-                    index % 2
-                      ? 'bg-luxury-burgundy text-luxury-burgundy-foreground'
-                      : 'bg-luxury-gold text-luxury-gold-foreground'
-                  }`}
-                >
-                  {index % 2 ? 'Bestseller' : 'New Arrival'}
-                </Badge>
-              </div>
-
-              <div className="p-4 space-y-3">
-                <div className="flex items-center space-x-1">
-                  {Array.from({ length: 5 }, (_, i) => i + 1).map((star) => (
-                    <StarIcon
-                      key={star}
-                      className={`h-3 w-3 ${
-                        star <= MIN_RATING
-                          ? 'fill-luxury-gold text-luxury-gold'
-                          : 'text-luxury-warm-gray/30'
-                      }`}
-                    />
-                  ))}
-                  <span className="text-xs text-luxury-warm-gray ml-1">
-                    ({Math.floor(MIN_REVIEWS + index + product.price)})
-                  </span>
-                </div>
-
-                <h3 className="font-medium text-luxury-charcoal group-hover:text-luxury-gold transition-colors text-ellipsis whitespace-nowrap overflow-hidden">
-                  {product.title}
-                </h3>
-
-                <div className="flex items-center space-x-2">
-                  <span className="text-lg font-bold text-luxury-charcoal">
-                    ${product.price.toLocaleString()}
-                  </span>
-                  {product.price < MIN_PROMO_PRICE && (
-                    <span className="text-sm text-luxury-warm-gray line-through">
-                      ${(product.price * PROMO_PERCENTAGE).toLocaleString()}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {products.map((product) => (
+          <ProductItem key={product.id} product={product} viewMode="grid" />
         ))}
       </div>
 
