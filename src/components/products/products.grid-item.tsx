@@ -15,7 +15,7 @@ const MIN_REVIEWS = 46;
 const MIN_PROMO_PRICE = 50;
 const PROMO_PERCENTAGE = 1.25;
 
-export const ProductItem = ({
+export const ProductGridItem = ({
   product,
   viewMode,
 }: {

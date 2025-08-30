@@ -1,6 +1,6 @@
 import type { Product } from '@/services/products/products.type';
 
-import { ProductItem } from './product-item';
+import { ProductGridItem } from './products.grid-item';
 
 export const ProductsGrid = ({
   products,
@@ -17,7 +17,7 @@ export const ProductsGrid = ({
     }`}
   >
     {products.map((product) => (
-      <ProductItem key={product.id} product={product} viewMode={viewMode} />
+      <ProductGridItem key={product.id} product={product} viewMode={viewMode} />
     ))}
   </div>
 );
