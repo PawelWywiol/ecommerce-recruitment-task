@@ -24,7 +24,7 @@ export const ProductGridItem = ({
     key={product.id}
     className="group cursor-pointer border-border/40 hover:border-luxury-gold/40 transition-all duration-300 hover:shadow-lg overflow-hidden"
   >
-    <Link href={`/product/${product.id}`}>
+    <Link href={`/product/${product.slug}`}>
       <CardContent className="p-0">
         {viewMode === 'grid' ? (
           <>
