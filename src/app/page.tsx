@@ -1,19 +1,9 @@
 import { getProducts } from '@/services/products/products';
 
-import { FeaturedProducts } from '@/components/featured-products';
-import { Features } from '@/components/features';
-import { HeroSection } from '@/components/hero-section';
-import { Newsletter } from '@/components/newsletter';
+import { MainView } from '@/components/views/main-view';
 
 export default async function Page() {
   const products = await getProducts({ offset: 0, limit: 4 });
 
-  return (
-    <>
-      <HeroSection />
-      <FeaturedProducts products={products} />
-      <Features />
-      <Newsletter />
-    </>
-  );
+  return <MainView products={products} />;
 }

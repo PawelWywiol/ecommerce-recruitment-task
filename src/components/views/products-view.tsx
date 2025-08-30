@@ -5,16 +5,16 @@ import { useState } from 'react';
 import type { Category } from '@/services/categories/categories.types';
 import type { Product } from '@/services/products/products.type';
 
-import { ProductsFilters } from './products.filters';
-import { ProductsGrid } from './products.grid';
-import { ProductsHeader } from './products.header';
-import { ProductsLoadMoreButton } from './products.load-more-button';
+import { ProductsFilters } from '../products/products.filters';
+import { ProductsGrid } from '../products/products.grid';
+import { ProductsHeader } from '../products/products.header';
+import { ProductsLoadMoreButton } from '../products/products.load-more-button';
 
 const MAX_PRODUCTS_TO_SHOW = 40;
 const PRODUCTS_PER_PAGE = 8;
 const EMPTY_CATEGORY_SLUG = '_';
 
-export const Products = ({
+export const ProductsView = ({
   products,
   categories,
 }: {

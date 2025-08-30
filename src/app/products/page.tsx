@@ -1,11 +1,11 @@
 import { getCategories } from '@/services/categories/categories';
 import { getProducts } from '@/services/products/products';
 
-import { Products } from '@/components/products/products';
+import { ProductsView } from '@/components/views/products-view';
 
 export default async function Page() {
   const categories = await getCategories();
   const products = await getProducts();
 
-  return <Products products={products} categories={categories} />;
+  return <ProductsView products={products} categories={categories} />;
 }

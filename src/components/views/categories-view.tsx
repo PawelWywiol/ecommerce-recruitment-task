@@ -12,7 +12,7 @@ import { Input } from '../ui/input';
 
 const MAX_CATEGORIES_TO_SHOW = 6;
 
-export const Categories = ({ categories }: { categories: Category[] }) => {
+export const CategoriesView = ({ categories }: { categories: Category[] }) => {
   const [filter, setFilter] = useState('');
   const filteredCategories = categories
     .filter((category) => category.name.toLowerCase().includes(filter.toLowerCase()))
