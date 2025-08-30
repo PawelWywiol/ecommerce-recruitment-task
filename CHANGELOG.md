@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.1.3](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.2...v0.1.3) (2025-08-30)
+
+
+### Features
+
+* add metadata and sitemap generation for improved SEO ([f075de0](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/f075de04e7e84a98d531339223f147295870a0b3))
+* enhance SEO with structured data and schema generation for pages ([060f371](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/060f3715fb9eb504264650e090115483796c678f))
+* implement error handling for category and product fetching ([c339db6](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/c339db6f0dfd2634389f1a3964fa6eabdbeac305))
+
+
+### Bug Fixes
+
+* update product link to use slug instead of id ([0f14b7f](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/0f14b7fb4f7bcf8a917a837c51e6dca45a9d51e8))
+
+
+### Documentation
+
+* update readme ([f605242](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/f605242cf26d75f5a582085999514b6472dd4e82))
+* update README with project description and setup instructions ([445af98](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/445af98c79fddf6f0dc86efca77fd8980a94932c))
+
 ### [0.1.2](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.1...v0.1.2) (2025-08-30)
 
 
