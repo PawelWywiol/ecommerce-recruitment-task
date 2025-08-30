@@ -14,11 +14,9 @@ const productsApiUrlWithSearchParams = (searchParams: ProductSearchParams = {}):
   const url = new URL(PRODUCTS_API_URL);
 
   Object.entries(parsedSearchParams.data).forEach(([key, value]) => {
-    if (value) {
-      url.searchParams.append(key, value);
-    }
+    url.searchParams.append(key, value);
   });
-
+  console.log(url.toString());
   return url.toString();
 };
 
