@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 
+import { handleErrors } from '@/lib/error-handler';
 import { getProductBySlug, getRelatedProductsBySlug } from '@/services/products/products';
 
 import { ProductView } from '@/components/views/product-view';
@@ -13,8 +14,15 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
     return notFound();
   }
 
-  const product = await getProductBySlug(slug);
-  const relatedProducts = await getRelatedProductsBySlug(slug);
+  const data = await handleErrors(() =>
+    Promise.all([getProductBySlug(slug), getRelatedProductsBySlug(slug)]),
+  );
+
+  if (!data.isSuccess) {
+    return notFound();
+  }
+
+  const [product, relatedProducts] = data.data;
 
   if (!product) {
     return notFound();

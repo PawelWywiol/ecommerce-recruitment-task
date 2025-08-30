@@ -4,6 +4,7 @@ import './globals.css';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
+import { ErrorBoundary } from '@/components/error-boundry/error-boundary';
 import { Footer } from '@/components/footer/footer';
 import { Header } from '@/components/header/header';
 
@@ -27,7 +28,9 @@ export default function RootLayout({
       <body className={`${fontSans.variable} antialiased`}>
         <div className="min-h-screen flex flex-col bg-background">
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <ErrorBoundary>{children}</ErrorBoundary>
+          </main>
           <Footer />
         </div>
         <SpeedInsights />
