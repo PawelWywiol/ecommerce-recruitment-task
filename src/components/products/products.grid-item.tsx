@@ -6,14 +6,12 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import type { Product } from '@/services/products/products.type';
 
+import { MIN_PROMO_PRICE, MIN_RATING, MIN_REVIEWS, PROMO_PERCENTAGE } from './products.config';
+import { ProductRating } from './products.rating';
+
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Card, CardContent } from '../ui/card';
-
-const MIN_RATING = 4;
-const MIN_REVIEWS = 46;
-const MIN_PROMO_PRICE = 50;
-const PROMO_PERCENTAGE = 1.25;
 
 export const ProductGridItem = ({
   product,
@@ -39,11 +37,12 @@ export const ProductGridItem = ({
                 />
               </picture>
               <Badge
-                className={`absolute top-3 left-3 ${
+                className={cn(
+                  'absolute top-3 left-3',
                   product.price > MIN_PROMO_PRICE
                     ? 'bg-luxury-burgundy text-luxury-burgundy-foreground'
-                    : 'bg-luxury-gold text-luxury-gold-foreground'
-                }`}
+                    : 'bg-luxury-gold text-luxury-gold-foreground',
+                )}
               >
                 {product.price > MIN_PROMO_PRICE ? 'Sale' : 'New'}
               </Badge>
@@ -127,21 +126,10 @@ export const ProductGridItem = ({
                 <p className="text-luxury-warm-gray">{product.category.name}</p>
               </div>
 
-              <div className="flex items-center space-x-1">
-                {Array.from({ length: 5 }, (_, i) => i + 1).map((star) => (
-                  <StarIcon
-                    key={star}
-                    className={`h-4 w-4 ${
-                      star <= MIN_RATING
-                        ? 'fill-luxury-gold text-luxury-gold'
-                        : 'text-luxury-warm-gray/30'
-                    }`}
-                  />
-                ))}
-                <span className="text-sm text-luxury-warm-gray ml-2">
-                  ({MIN_REVIEWS + product.id + product.price} reviews)
-                </span>
-              </div>
+              <ProductRating
+                rating={MIN_RATING}
+                reviews={MIN_REVIEWS + product.id + product.price}
+              />
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
