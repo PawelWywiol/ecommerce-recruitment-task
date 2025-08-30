@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import type { Product } from '@/services/products/products.type';
 
-import { ProductItem } from './products/product-item';
+import { ProductsGrid } from './products/products.grid';
 import { Button } from './ui/button';
 
 export const FeaturedProducts = ({ products }: { products: Product[] }) => (
@@ -17,11 +17,7 @@ export const FeaturedProducts = ({ products }: { products: Product[] }) => (
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {products.map((product) => (
-          <ProductItem key={product.id} product={product} viewMode="grid" />
-        ))}
-      </div>
+      <ProductsGrid products={products} viewMode="grid" />
 
       <div className="text-center mt-12">
         <Button
