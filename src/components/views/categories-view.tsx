@@ -59,7 +59,7 @@ export const CategoriesView = ({ categories }: { categories: Category[] }) => {
             key={category.id}
             className="group cursor-pointer border-border/40 hover:border-luxury-gold/40 transition-all duration-300 hover:shadow-lg overflow-hidden"
           >
-            <Link href={`/category/${category.slug}`}>
+            <Link href={`/products?category=${category.slug}`}>
               <CardContent className="p-0">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <picture>

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import type { Category } from '@/services/categories/categories.types';
 import type { Product } from '@/services/products/products.type';
@@ -21,10 +22,18 @@ export const ProductsView = ({
   products: Product[];
   categories: Category[];
 }) => {
+  const searchParams = useSearchParams();
   const [filter, setFilter] = useState('');
   const [category, setCategory] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam && categories.some((cat) => cat.slug === categoryParam)) {
+      setCategory(categoryParam);
+    }
+  }, [searchParams, categories]);
 
   const filteredProducts = products
     .filter((product) => product.title.toLowerCase().includes(filter.toLowerCase()))
