@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.1.5](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.4...v0.1.5) (2025-08-31)
+
+
+### Features
+
+* centralize metadata configuration and improve SEO across pages ([6dcb579](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/6dcb57988212ebe6ddb1951f9d16f85f531be753))
+* enhance product filtering by adding category support in ProductsView ([d748fca](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/d748fca0a73c84926c407adc8c56cbffed81f9cd))
+* update pricing display and quantity handling in ProductView ([c07b0cd](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/c07b0cd7ab5df04783f21d7402269ba4cb477514))
+
 ### [0.1.4](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.3...v0.1.4) (2025-08-31)
 
 
