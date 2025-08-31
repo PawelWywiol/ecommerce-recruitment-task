@@ -1,8 +1,10 @@
+export const PRODUCTS_REVALIDATE_TIME_SECONDS = 3600;
+
 export const PRODUCTS_API_URL = 'https://api.escuelajs.co/api/v1/products';
-export const PRODUCT_BY_SLUG_API_URL = (slug: string): string =>
-  `https://api.escuelajs.co/api/v1/products/slug/${slug}`;
-export const PRODUCT_BY_SLUG_RELATED_API_URL = (slug: string): string =>
-  `https://api.escuelajs.co/api/v1/products/slug/${slug}/related`;
+export const PRODUCT_BY_ID_API_URL = (id: string): string =>
+  `https://api.escuelajs.co/api/v1/products/${id}`;
+export const PRODUCT_BY_ID_RELATED_API_URL = (id: string): string =>
+  `https://api.escuelajs.co/api/v1/products/${id}/related`;
 
 export const PRODUCT_TITLE_MAX_LENGTH = 100;
 export const PRODUCT_TITLE_MIN_LENGTH = 1;

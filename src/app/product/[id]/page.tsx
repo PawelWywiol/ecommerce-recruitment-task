@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { handleErrors } from '@/lib/error-handler';
 import { generateBreadcrumbSchema, generateProductSchema } from '@/lib/schema';
-import { getProductBySlug, getRelatedProductsBySlug } from '@/services/products/products';
+import { getProductById, getRelatedProductsById } from '@/services/products/products';
 
 import { ProductView } from '@/components/views/product-view';
 import {
@@ -23,18 +23,18 @@ const MAX_OPEN_GRAPH_IMAGES = 4;
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { id } = await params;
 
-  if (typeof slug !== 'string' || !slug.length) {
+  if (typeof id !== 'string' || !id.length) {
     return {
       title: APP_PRODUCT_NOT_FOUND_TITLE,
       description: APP_PRODUCT_NOT_FOUND_DESCRIPTION,
     };
   }
 
-  const data = await handleErrors(() => getProductBySlug(slug));
+  const data = await handleErrors(() => getProductById(id));
 
   if (!data.isSuccess || !data.data) {
     return {
@@ -47,7 +47,10 @@ export async function generateMetadata({
 
   return {
     title: `${product.title} - ${product.category.name} | ${APP_SITE_NAME}`,
-    description: `${product.description.slice(0, DESCRIPTION_MAX_LENGTH)}... Shop luxury ${product.category.name.toLowerCase()} at premium prices. Free shipping available.`,
+    description: `${product.description.slice(
+      0,
+      DESCRIPTION_MAX_LENGTH,
+    )}... Shop luxury ${product.category.name.toLowerCase()} at premium prices. Free shipping available.`,
     openGraph: {
       title: `${product.title} - ${product.category.name}`,
       description: product.description,
@@ -71,41 +74,35 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page(props: { params: Promise<{ slug: string }> }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
 
-  const slug = params.slug;
+  const id = params.id;
 
-  if (typeof slug !== 'string' || !slug.length) {
+  if (typeof id !== 'string' || !id.length) {
     return notFound();
   }
 
-  const data = await handleErrors(() =>
-    Promise.all([getProductBySlug(slug), getRelatedProductsBySlug(slug)]),
-  );
+  const product = await handleErrors(() => getProductById(id));
+  const relatedProducts = await handleErrors(() => getRelatedProductsById(id));
 
-  if (!data.isSuccess) {
+  if (!product.isSuccess || !product.data) {
+    console.log(product);
     return notFound();
   }
 
-  const [product, relatedProducts] = data.data;
-
-  if (!product) {
-    return notFound();
-  }
-
-  const productSchema = generateProductSchema(product);
+  const productSchema = generateProductSchema(product.data);
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: APP_BASE_URL },
     { name: 'Products', url: APP_PRODUCTS_URL },
     {
-      name: product.category.name,
-      url: APP_CATEGORY_URL(product.category.slug),
+      name: product.data.category.name,
+      url: APP_CATEGORY_URL(product.data.category.slug),
     },
     {
-      name: product.title,
-      url: APP_PRODUCT_URL(product.slug),
+      name: product.data.title,
+      url: APP_PRODUCT_URL(product.data.slug),
     },
   ]);
 
@@ -118,7 +115,10 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
           __html: JSON.stringify([productSchema, breadcrumbSchema]),
         }}
       />
-      <ProductView product={product} relatedProducts={relatedProducts} />
+      <ProductView
+        product={product.data}
+        relatedProducts={relatedProducts.isSuccess ? relatedProducts.data : []}
+      />
     </>
   );
 }
