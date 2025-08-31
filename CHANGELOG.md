@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.1.7](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.6...v0.1.7) (2025-08-31)
+
+
+### Features
+
+* implement cart functionality with Zustand for state management ([d50aa40](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/d50aa4024bc383913f89f6a298556f881cd72339))
+
+
+### Bug Fixes
+
+* resolve public api general problems ([2ee80ea](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/2ee80ea3e97fd83f0a818e69481bbf888182f21f))
+
 ### [0.1.6](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.5...v0.1.6) (2025-08-31)
 
 
