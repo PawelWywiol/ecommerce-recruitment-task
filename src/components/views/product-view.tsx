@@ -169,9 +169,9 @@ export const ProductView = ({
               <span className="text-3xl font-bold text-luxury-charcoal">
                 ${product.price.toLocaleString()}
               </span>
-              {product.price && (
+              {product.price > MIN_PROMO_PRICE && (
                 <span className="text-xl text-luxury-warm-gray line-through">
-                  ${product.price.toLocaleString()}
+                  ${(product.price * PROMO_PERCENTAGE).toLocaleString()}
                 </span>
               )}
               {product.price > MIN_PROMO_PRICE && (
@@ -179,7 +179,7 @@ export const ProductView = ({
                   variant="destructive"
                   className="bg-luxury-burgundy text-luxury-burgundy-foreground"
                 >
-                  Save ${(product.price * PROMO_PERCENTAGE).toLocaleString()}
+                  Save ${(product.price * (PROMO_PERCENTAGE - 1)).toLocaleString()}
                 </Badge>
               )}
             </div>
@@ -261,7 +261,9 @@ export const ProductView = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => setQuantity(quantity + 1)}
+                  onClick={() =>
+                    setQuantity(Math.min(quantity + 1, MOCKED_PRODUCT_DATA.stockCount))
+                  }
                   className="h-10 w-10 p-0 rounded-l-none"
                 >
                   <PlusIcon className="h-4 w-4" />
@@ -281,7 +283,7 @@ export const ProductView = ({
                 disabled={!MOCKED_PRODUCT_DATA.inStock}
               >
                 <ShoppingBagIcon className="mr-2 h-4 w-4" />
-                Add to Cart - ${(MOCKED_PRODUCT_DATA.price * quantity).toLocaleString()}
+                Add to Cart - ${(product.price * quantity).toLocaleString()}
               </Button>
               <Button
                 variant="outline"
