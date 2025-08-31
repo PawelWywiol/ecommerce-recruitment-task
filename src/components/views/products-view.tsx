@@ -1,6 +1,5 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import type { Category } from '@/services/categories/categories.types';
@@ -18,22 +17,22 @@ const EMPTY_CATEGORY_SLUG = '_';
 export const ProductsView = ({
   products,
   categories,
+  defaultCategory,
 }: {
   products: Product[];
   categories: Category[];
+  defaultCategory?: string;
 }) => {
-  const searchParams = useSearchParams();
   const [filter, setFilter] = useState('');
   const [category, setCategory] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
-    const categoryParam = searchParams.get('category');
-    if (categoryParam && categories.some((cat) => cat.slug === categoryParam)) {
-      setCategory(categoryParam);
+    if (defaultCategory && categories.some((cat) => cat.slug === defaultCategory)) {
+      setCategory(defaultCategory);
     }
-  }, [searchParams, categories]);
+  }, [defaultCategory, categories]);
 
   const filteredProducts = products
     .filter((product) => product.title.toLowerCase().includes(filter.toLowerCase()))

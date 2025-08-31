@@ -50,7 +50,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
   const data = await handleErrors(async () => {
     return await Promise.all([getCategories(), getProducts()]);
   });
@@ -74,6 +79,9 @@ export default async function Page() {
     { name: 'Products', url: APP_PRODUCTS_URL },
   ]);
 
+  const categorySearchParameter = typeof params.category === 'string' ? params.category : undefined;
+  const defaultCategory = categories.find((category) => category.slug === categorySearchParameter);
+
   return (
     <>
       <script
@@ -83,7 +91,11 @@ export default async function Page() {
           __html: JSON.stringify([collectionPageSchema, itemListSchema, breadcrumbSchema]),
         }}
       />
-      <ProductsView products={products} categories={categories} />
+      <ProductsView
+        products={products}
+        categories={categories}
+        defaultCategory={defaultCategory?.slug}
+      />
     </>
   );
 }
