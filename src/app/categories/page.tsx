@@ -6,36 +6,42 @@ import { generateBreadcrumbSchema, generateCollectionPageSchema } from '@/lib/sc
 import { getCategories } from '@/services/categories/categories';
 
 import { CategoriesView } from '@/components/views/categories-view';
+import {
+  APP_BASE_URL,
+  APP_CATEGORIES_DESCRIPTION,
+  APP_CATEGORIES_SEO_TITLE,
+  APP_CATEGORIES_TITLE,
+  APP_CATEGORIES_URL,
+  APP_COVER_IMAGE_URL,
+  APP_DEFAULT_LOCALE,
+  APP_IMAGES_ALT_TEXT,
+  APP_SITE_NAME,
+} from '@/config/metadata';
 
 export const metadata: Metadata = {
-  title: 'Shop by Category - Luxury Collections | E-Commerce',
-  description:
-    'Explore our carefully curated collections of luxury goods, each category representing the finest in its field. Browse premium categories with personal stylist assistance available.',
+  title: APP_CATEGORIES_SEO_TITLE,
+  description: APP_CATEGORIES_DESCRIPTION,
   openGraph: {
-    title: 'Shop by Category - Luxury Collections',
-    description:
-      'Explore our carefully curated collections of luxury goods, each category representing the finest in its field. Browse premium categories with personal stylist assistance available.',
-    url: 'https://ecommerce-recruitment-task.vercel.app/categories',
-    siteName: 'E-Commerce Luxury Store',
+    title: APP_CATEGORIES_TITLE,
+    description: APP_CATEGORIES_DESCRIPTION,
+    url: APP_CATEGORIES_URL,
+    siteName: APP_SITE_NAME,
     images: [
       {
-        url: 'https://images.pexels.com/photos/33676167/pexels-photo-33676167.jpeg?auto=compress&cs=tinysrgb&w=1200',
+        url: APP_COVER_IMAGE_URL,
         width: 1200,
         height: 630,
-        alt: 'Luxury Categories Collection',
+        alt: APP_IMAGES_ALT_TEXT,
       },
     ],
-    locale: 'en_US',
+    locale: APP_DEFAULT_LOCALE,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Shop by Category - Luxury Collections',
-    description:
-      'Explore our carefully curated collections of luxury goods, each category representing the finest in its field. Browse premium categories with personal stylist assistance available.',
-    images: [
-      'https://images.pexels.com/photos/33676167/pexels-photo-33676167.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    ],
+    title: APP_CATEGORIES_TITLE,
+    description: APP_CATEGORIES_DESCRIPTION,
+    images: [APP_COVER_IMAGE_URL],
   },
 };
 
@@ -49,14 +55,14 @@ export default async function Page() {
   const categories = data.data;
 
   const collectionPageSchema = generateCollectionPageSchema(
-    'Shop by Category - Luxury Collections',
-    'Explore our carefully curated collections of luxury goods, each category representing the finest in its field.',
-    'https://ecommerce-recruitment-task.vercel.app/categories',
+    APP_CATEGORIES_TITLE,
+    APP_CATEGORIES_DESCRIPTION,
+    APP_CATEGORIES_URL,
   );
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', url: 'https://ecommerce-recruitment-task.vercel.app' },
-    { name: 'Categories', url: 'https://ecommerce-recruitment-task.vercel.app/categories' },
+    { name: 'Home', url: APP_BASE_URL },
+    { name: 'Categories', url: APP_CATEGORIES_URL },
   ]);
 
   return (

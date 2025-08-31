@@ -1,34 +1,43 @@
 import type { Product } from '@/services/products/products.type';
 
+import {
+  APP_BASE_URL,
+  APP_DESCRIPTION,
+  APP_LOGO_URL,
+  APP_ORGANIZATION_DESCRIPTION,
+  APP_PHONE_NUMBER,
+  APP_PRODUCT_URL,
+  APP_PRODUCTS_URL,
+  APP_SITE_NAME,
+  APP_SOCIAL_FACEBOOK,
+  APP_SOCIAL_INSTAGRAM,
+  APP_SOCIAL_TWITTER,
+} from '@/config/metadata';
+
 export const generateOrganizationSchema = (): object => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'E-Commerce Luxury Store',
-  url: 'https://ecommerce-recruitment-task.vercel.app',
-  logo: 'https://ecommerce-recruitment-task.vercel.app/logo.png',
-  description:
-    "Premium luxury goods e-commerce store featuring curated collections of the world's finest products.",
+  name: APP_SITE_NAME,
+  url: APP_BASE_URL,
+  logo: APP_LOGO_URL,
+  description: APP_ORGANIZATION_DESCRIPTION,
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+1-800-LUXURY',
+    telephone: APP_PHONE_NUMBER,
     contactType: 'Customer Service',
   },
-  sameAs: [
-    'https://facebook.com/ecommerce-luxury',
-    'https://instagram.com/ecommerce-luxury',
-    'https://twitter.com/ecommerce-luxury',
-  ],
+  sameAs: [APP_SOCIAL_FACEBOOK, APP_SOCIAL_INSTAGRAM, APP_SOCIAL_TWITTER],
 });
 
 export const generateWebSiteSchema = (): object => ({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'E-Commerce Luxury Store',
-  url: 'https://ecommerce-recruitment-task.vercel.app',
-  description: "Discover our curated collection of the world's finest luxury goods.",
+  name: APP_SITE_NAME,
+  url: APP_BASE_URL,
+  description: APP_DESCRIPTION,
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://ecommerce-recruitment-task.vercel.app/products?search={search_term_string}',
+    target: `${APP_PRODUCTS_URL}?search={search_term_string}`,
     'query-input': 'required name=search_term_string',
   },
 });
@@ -50,7 +59,7 @@ export const generateProductSchema = (product: Product): object => ({
   name: product.title,
   description: product.description,
   image: product.images,
-  url: `https://ecommerce-recruitment-task.vercel.app/product/${product.slug}`,
+  url: APP_PRODUCT_URL(product.slug),
   sku: product.id.toString(),
   brand: {
     '@type': 'Brand',
@@ -62,7 +71,7 @@ export const generateProductSchema = (product: Product): object => ({
     price: product.price.toString(),
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
-    url: `https://ecommerce-recruitment-task.vercel.app/product/${product.slug}`,
+    url: APP_PRODUCT_URL(product.slug),
   },
   dateCreated: product.creationAt,
   dateModified: product.updatedAt,
@@ -95,7 +104,7 @@ export const generateItemListSchema = (products: Product[]): object => ({
     item: {
       '@type': 'Product',
       name: product.title,
-      url: `https://ecommerce-recruitment-task.vercel.app/product/${product.slug}`,
+      url: APP_PRODUCT_URL(product.slug),
       image: product.images[0],
       offers: {
         '@type': 'Offer',

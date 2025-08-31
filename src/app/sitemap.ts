@@ -4,24 +4,24 @@ import { handleErrors } from '@/lib/error-handler';
 import { getCategories } from '@/services/categories/categories';
 import { getProducts } from '@/services/products/products';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://ecommerce-recruitment-task.vercel.app';
+import { APP_BASE_URL } from '@/config/metadata';
 
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: APP_BASE_URL,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: `${baseUrl}/categories`,
+      url: `${APP_BASE_URL}/categories`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/products`,
+      url: `${APP_BASE_URL}/products`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const products = productsData.data;
     productRoutes.push(
       ...products.map((product) => ({
-        url: `${baseUrl}/product/${product.slug}`,
+        url: `${APP_BASE_URL}/product/${product.slug}`,
         lastModified: new Date(product.updatedAt),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const categories = categoriesData.data;
     categoryRoutes.push(
       ...categories.map((category) => ({
-        url: `${baseUrl}/category/${category.slug}`,
+        url: `${APP_BASE_URL}/category/${category.slug}`,
         lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: 0.6,

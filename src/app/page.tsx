@@ -10,36 +10,40 @@ import {
 import { getProducts } from '@/services/products/products';
 
 import { MainView } from '@/components/views/main-view';
+import {
+  APP_BASE_URL,
+  APP_COVER_IMAGE_URL,
+  APP_DEFAULT_LOCALE,
+  APP_DESCRIPTION,
+  APP_IMAGES_ALT_TEXT,
+  APP_SITE_NAME,
+  APP_TITLE,
+} from '@/config/metadata';
 
 export const metadata: Metadata = {
-  title: 'Luxury Redefined - Premium Collection | E-Commerce',
-  description:
-    "Discover our curated collection of the world's finest luxury goods. From haute couture to exquisite jewelry, each piece tells a story of exceptional craftsmanship. Shop our featured collection with 10K+ happy customers and 4.9/5 rating.",
+  title: APP_TITLE,
+  description: APP_DESCRIPTION,
   openGraph: {
-    title: 'Luxury Redefined - Premium Collection',
-    description:
-      "Discover our curated collection of the world's finest luxury goods. From haute couture to exquisite jewelry, each piece tells a story of exceptional craftsmanship.",
-    url: 'https://ecommerce-recruitment-task.vercel.app',
-    siteName: 'E-Commerce Luxury Store',
+    title: APP_TITLE,
+    description: APP_DESCRIPTION,
+    url: APP_BASE_URL,
+    siteName: APP_SITE_NAME,
     images: [
       {
-        url: 'https://images.pexels.com/photos/33676167/pexels-photo-33676167.jpeg?auto=compress&cs=tinysrgb&w=1200',
+        url: APP_COVER_IMAGE_URL,
         width: 1200,
         height: 630,
-        alt: 'Luxury Fashion Collection',
+        alt: APP_IMAGES_ALT_TEXT,
       },
     ],
-    locale: 'en_US',
+    locale: APP_DEFAULT_LOCALE,
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Luxury Redefined - Premium Collection',
-    description:
-      "Discover our curated collection of the world's finest luxury goods. From haute couture to exquisite jewelry, each piece tells a story of exceptional craftsmanship.",
-    images: [
-      'https://images.pexels.com/photos/33676167/pexels-photo-33676167.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    ],
+    title: APP_TITLE,
+    description: APP_DESCRIPTION,
+    images: [APP_COVER_IMAGE_URL],
   },
 };
 

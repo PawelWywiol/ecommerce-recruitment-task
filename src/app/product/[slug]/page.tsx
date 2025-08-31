@@ -6,6 +6,16 @@ import { generateBreadcrumbSchema, generateProductSchema } from '@/lib/schema';
 import { getProductBySlug, getRelatedProductsBySlug } from '@/services/products/products';
 
 import { ProductView } from '@/components/views/product-view';
+import {
+  APP_BASE_URL,
+  APP_CATEGORY_URL,
+  APP_DEFAULT_LOCALE,
+  APP_PRODUCT_NOT_FOUND_DESCRIPTION,
+  APP_PRODUCT_NOT_FOUND_TITLE,
+  APP_PRODUCT_URL,
+  APP_PRODUCTS_URL,
+  APP_SITE_NAME,
+} from '@/config/metadata';
 
 const DESCRIPTION_MAX_LENGTH = 160;
 const MAX_OPEN_GRAPH_IMAGES = 4;
@@ -19,8 +29,8 @@ export async function generateMetadata({
 
   if (typeof slug !== 'string' || !slug.length) {
     return {
-      title: 'Product Not Found | E-Commerce',
-      description: 'The requested product could not be found.',
+      title: APP_PRODUCT_NOT_FOUND_TITLE,
+      description: APP_PRODUCT_NOT_FOUND_DESCRIPTION,
     };
   }
 
@@ -28,28 +38,28 @@ export async function generateMetadata({
 
   if (!data.isSuccess || !data.data) {
     return {
-      title: 'Product Not Found | E-Commerce',
-      description: 'The requested product could not be found.',
+      title: APP_PRODUCT_NOT_FOUND_TITLE,
+      description: APP_PRODUCT_NOT_FOUND_DESCRIPTION,
     };
   }
 
   const product = data.data;
 
   return {
-    title: `${product.title} - ${product.category.name} | E-Commerce`,
+    title: `${product.title} - ${product.category.name} | ${APP_SITE_NAME}`,
     description: `${product.description.slice(0, DESCRIPTION_MAX_LENGTH)}... Shop luxury ${product.category.name.toLowerCase()} at premium prices. Free shipping available.`,
     openGraph: {
       title: `${product.title} - ${product.category.name}`,
       description: product.description,
-      url: `https://ecommerce-recruitment-task.vercel.app/product/${product.slug}`,
-      siteName: 'E-Commerce Luxury Store',
+      url: APP_PRODUCT_URL(product.slug),
+      siteName: APP_SITE_NAME,
       images: product.images.slice(0, MAX_OPEN_GRAPH_IMAGES).map((image) => ({
         url: image,
         width: 1200,
         height: 630,
         alt: product.title,
       })),
-      locale: 'en_US',
+      locale: APP_DEFAULT_LOCALE,
       type: 'website',
     },
     twitter: {
@@ -87,15 +97,15 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
   const productSchema = generateProductSchema(product);
 
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', url: 'https://ecommerce-recruitment-task.vercel.app' },
-    { name: 'Products', url: 'https://ecommerce-recruitment-task.vercel.app/products' },
+    { name: 'Home', url: APP_BASE_URL },
+    { name: 'Products', url: APP_PRODUCTS_URL },
     {
       name: product.category.name,
-      url: `https://ecommerce-recruitment-task.vercel.app/category/${product.category.slug}`,
+      url: APP_CATEGORY_URL(product.category.slug),
     },
     {
       name: product.title,
-      url: `https://ecommerce-recruitment-task.vercel.app/product/${product.slug}`,
+      url: APP_PRODUCT_URL(product.slug),
     },
   ]);
 
