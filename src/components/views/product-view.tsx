@@ -15,6 +15,7 @@ import type { Product } from '@/services/products/products.type';
 
 import { MOCKED_PRODUCT_DATA } from '@/__mocks__/product';
 import { MOCKED_REVIEWS } from '@/__mocks__/reviews';
+import { useCartActions } from '@/stores/cart.store';
 import { Breadcrumbs } from '../breadcrubs';
 import { MIN_PROMO_PRICE, MIN_RATING, PROMO_PERCENTAGE } from '../products/products.config';
 import { ProductGridItem } from '../products/products.grid-item';
@@ -43,6 +44,8 @@ export const ProductView = ({
   );
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
+
+  const { addProduct } = useCartActions();
 
   const nextImage = () => {
     setSelectedImage((prev) => (prev + 1) % product.images.length);
@@ -281,6 +284,7 @@ export const ProductView = ({
                 size="lg"
                 className="flex-1 bg-luxury-charcoal hover:bg-luxury-charcoal/90 text-luxury-charcoal-foreground"
                 disabled={!MOCKED_PRODUCT_DATA.inStock}
+                onClick={() => addProduct(product, quantity)}
               >
                 <ShoppingBagIcon className="mr-2 h-4 w-4" />
                 Add to Cart - ${(product.price * quantity).toLocaleString()}
