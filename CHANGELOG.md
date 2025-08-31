@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.1.4](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.3...v0.1.4) (2025-08-31)
+
+
+### Bug Fixes
+
+* update product API URLs to use slug in path ([1a27fea](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/1a27feaa9818efda655dda856c1e469e5da5280e))
+
 ### [0.1.3](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.2...v0.1.3) (2025-08-30)
 
 
