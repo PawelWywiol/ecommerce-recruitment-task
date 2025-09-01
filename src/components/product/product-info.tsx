@@ -1,17 +1,18 @@
 'use client';
 
 import { HeartIcon } from 'lucide-react';
-import { useState } from 'react';
 
 import type { Product } from '@/services/products/products.type';
 
+import { useWishlistActions } from '@/stores/cart.store';
 import { MIN_PROMO_PRICE, MIN_RATING, PROMO_PERCENTAGE } from '../products/products.config';
 import { ProductRating } from '../products/products.rating';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 
 export const ProductInfo = ({ product }: { product: Product }) => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { toggleWishlistItem, isInWishlist } = useWishlistActions();
+  const isWishlisted = isInWishlist(product.id);
 
   return (
     <div className="space-y-4">
@@ -25,7 +26,7 @@ export const ProductInfo = ({ product }: { product: Product }) => {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => setIsWishlisted(!isWishlisted)}
+          onClick={() => toggleWishlistItem(product.id)}
           className={`h-10 w-10 p-0 ${
             isWishlisted ? 'text-luxury-burgundy' : 'text-luxury-warm-gray'
           }`}

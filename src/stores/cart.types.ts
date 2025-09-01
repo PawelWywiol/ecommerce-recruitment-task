@@ -15,6 +15,16 @@ export interface CartSummary {
   totalPrice: number;
 }
 
+export interface WishlistState {
+  wishlistItems: number[];
+}
+
+export interface WishlistActions {
+  toggleWishlistItem: (productId: number) => void;
+  isInWishlist: (productId: number) => boolean;
+  clearWishlist: () => void;
+}
+
 export interface CartState extends CartSummary {
   items: CartItem[];
 }
@@ -28,4 +38,4 @@ export interface CartActions {
   saveToStorage: () => void;
 }
 
-export type CartStore = CartState & CartActions;
+export type CartStore = CartState & CartActions & WishlistState & WishlistActions;
