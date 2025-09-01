@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+### [0.1.8](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.7...v0.1.8) (2025-09-01)
+
+
+### Features
+
+* implement wishlist functionality with local storage support ([d6dd8ad](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/d6dd8ad80d6138534d9253b57f20db0deabf4bb1))
+* refactor categories view ([7fe271e](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/7fe271e45767e0c4f9966e85983e0c3bd97b0ffb))
+* refactor product view ([f8dd7c3](https://github.com/PawelWywiol/ecommerce-recruitment-task/commit/f8dd7c326aca434a83ae3fa58187970bad794b4d))
+
 ### [0.1.7](https://github.com/PawelWywiol/ecommerce-recruitment-task/compare/v0.1.6...v0.1.7) (2025-08-31)
 
 
